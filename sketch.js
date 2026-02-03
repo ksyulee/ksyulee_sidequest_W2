@@ -1,18 +1,13 @@
-// PANIC + MISCHIEF p5.js PLATFORMER BLOB
-// Emotion: Panic (twitchy movement, stronger falling, jitter, wind zones)
-// Bonus: Mischief objects you can bump/steal on a small map (press E to steal)
-
 // ---------------------- Globals ----------------------
 // Simple mood + snack objects version (based on your original structure)
 //
 // Mood rules:
-// - Happy when jumping (rising, vy < 0)
-// - Angry when falling off a platform (was onGround, now not onGround and vy > 0)
+// - Happy when jumping 
 // - Calm otherwise
 //
 // Mischief/snacks:
 // - Small objects ("snacks") placed around the map
-// - When blob touches a snack, it "eats" it (snack disappears + counter++)
+// - When blob touches a snack, it "eats" it 
 
 let floorY3;
 let restartBtn3;
@@ -57,7 +52,6 @@ const moodLerp = 0.12;
 const MOODS = {
   calm:  { wobble: 6,  wobbleFreq: 0.85, tSpeed: 0.010, color: [20, 120, 255] },
   happy: { wobble: 12,  wobbleFreq: 1.20, tSpeed: 0.015, color: [60, 200, 120] },
-  angry: { wobble: 20, wobbleFreq: 1.60, tSpeed: 0.020, color: [240, 80, 60] },
 };
 
 let wasOnGround3 = false;
@@ -106,7 +100,6 @@ restartBtn3.mousePressed(restartGame3);
 
 function draw() {
 if (mood3 === "happy") background(220, 255, 230);
-else if (mood3 === "angry") background(255, 220, 220);
 else background(230, 240, 255); // calm
 
 
@@ -172,12 +165,10 @@ else background(230, 240, 255); // calm
 
   // --- Mood update (simple) ---
   // Happy when jumping (moving up)
-  // Angry only when "falling off" (was grounded, now not grounded and falling)
   const fellOff = wasOnGround3 && !blob3.onGround && blob3.vy > 0.4;
 
   if (blob3.vy < -0.2) setMood3("happy");
-  else if (fellOff && blob3.vy > 2.0) setMood3("angry");
-  else setMood3("calm");
+  else if (fellOff && blob3.vy > 2.0)  setMood3("calm");
 
   wasOnGround3 = blob3.onGround;
 
